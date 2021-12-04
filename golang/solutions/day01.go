@@ -2,8 +2,8 @@ package solutions
 
 import (
 	"bufio"
+	"ochronus/aoc2021/utils"
 	"os"
-	"strconv"
 )
 
 func getInput() []int {
@@ -13,8 +13,7 @@ func getInput() []int {
 	scanner.Split(bufio.ScanLines)
 	var lines []int
 	for scanner.Scan() {
-		i, _ := strconv.Atoi(scanner.Text())
-		lines = append(lines, i)
+		lines = append(lines, utils.StrToInt(scanner.Text()))
 	}
 	return lines
 }

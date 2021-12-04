@@ -1,25 +1,12 @@
 package solutions
 
 import (
-	"bufio"
-	"os"
+	"ochronus/aoc2021/utils"
 	"strconv"
 )
 
-func getDay3Input() []string {
-	file, _ := os.Open("../inputs/03.txt")
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-	var lines []string
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines
-}
-
 func Day03P01() int64 {
-	lines := getDay3Input()
+	lines := utils.ReadFileLines("../inputs/03.txt")
 	ones := make([]int, len(lines[0]))
 	majorityLimit := len(lines) / 2
 	gammaBits := ""
@@ -98,7 +85,7 @@ func filter(lines []string, oxy bool) int64 {
 }
 
 func Day03P02() int64 {
-	lines := getDay3Input()
+	lines := utils.ReadFileLines("../inputs/03.txt")
 
 	oxygen := filter(lines, true)
 	co2 := filter(lines, false)

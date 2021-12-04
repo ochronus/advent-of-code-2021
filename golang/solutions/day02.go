@@ -2,8 +2,8 @@ package solutions
 
 import (
 	"bufio"
+	"ochronus/aoc2021/utils"
 	"os"
-	"strconv"
 	"strings"
 )
 
@@ -20,10 +20,9 @@ func getDay2Input() []instr {
 	var lines []instr
 	for scanner.Scan() {
 		parts := strings.Split(scanner.Text(), " ")
-		amount, _ := strconv.Atoi(parts[1])
 		lines = append(lines, instr{
 			Direction: parts[0],
-			Amount:    amount,
+			Amount:    utils.StrToInt(parts[1]),
 		})
 	}
 	return lines
