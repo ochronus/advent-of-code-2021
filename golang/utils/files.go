@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func ReadFileLines(path string) []string {
@@ -24,4 +25,15 @@ func ReadFileLines(path string) []string {
 func ReadFileToString(path string) string {
 	b, _ := ioutil.ReadFile(path)
 	return string(b)
+}
+
+func ReadFileToIntList(path string) []int {
+
+	s := ReadFileToString(path)
+	i := strings.Split(s, ",")
+	list := []int{}
+	for _, elem := range i {
+		list = append(list, StrToInt(elem))
+	}
+	return list
 }
