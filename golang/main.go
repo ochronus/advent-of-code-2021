@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	fmt.Printf("Day 06, Part 1: %d\n", solutions.Day06P01())
-	fmt.Printf("Day 06, Part 2: %d\n", solutions.Day06P02())
+	fmt.Printf("Day 07, Part 1: %d\n", solutions.Day07P01())
+	fmt.Printf("Day 07, Part 2: %d\n", solutions.Day07P02())
 }
