@@ -105,6 +105,7 @@ func Day08P02() int {
 				if output == digit {
 					cnt += math.Pow(10, tenExp) * float64(numericValue)
 					tenExp -= 1.0
+					break
 				}
 			}
 		}
