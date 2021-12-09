@@ -18,3 +18,11 @@ func StringIntersection(a, b string) (count int) {
 	}
 	return
 }
+
+func StrToIntList(s string) []int {
+	var list []int
+	for _, word := range strings.Split(s, "") {
+		list = append(list, StrToInt(word))
+	}
+	return list
+}
