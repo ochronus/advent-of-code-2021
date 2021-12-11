@@ -5,14 +5,10 @@ import (
 	"sort"
 )
 
-type coordinate struct {
-	x int
-	y int
-}
-type heightmap map[coordinate]int
-type boolmap map[coordinate]bool
+type heightmap map[Coordinate]int
+type boolmap map[Coordinate]bool
 
-var neighbors = [4]coordinate{
+var neighbors = [4]Coordinate{
 	{0, -1},
 	{0, 1},
 	{-1, 0},
@@ -24,19 +20,19 @@ func parseDay9Input() heightmap {
 	grid := make(heightmap)
 	for x, line := range lines {
 		for y, height := range utils.StrToIntList(line) {
-			grid[coordinate{x, y}] = height
+			grid[Coordinate{x, y}] = height
 		}
 	}
 	return grid
 }
 
-func findLowPoints(grid heightmap) (sum int, lowpoints []coordinate) {
+func findLowPoints(grid heightmap) (sum int, lowpoints []Coordinate) {
 	for pos, height := range grid {
 		lowest := 9
 		for _, neighbor := range neighbors {
-			if nHeight, ok := grid[coordinate{
-				x: pos.x + neighbor.x,
-				y: pos.y + neighbor.y,
+			if nHeight, ok := grid[Coordinate{
+				X: pos.X + neighbor.X,
+				Y: pos.Y + neighbor.Y,
 			}]; ok {
 				lowest = utils.Min(lowest, nHeight)
 			}
@@ -72,11 +68,11 @@ func Day09P02() int {
 	return basinSizes[lastindex] * basinSizes[lastindex-1] * basinSizes[lastindex-2]
 }
 
-func getBasinSize(grid map[coordinate]int, pos coordinate, start coordinate, seen boolmap) (sum int) {
+func getBasinSize(grid map[Coordinate]int, pos Coordinate, start Coordinate, seen boolmap) (sum int) {
 	for _, neighbor := range neighbors {
-		basinCandidate := coordinate{
-			x: pos.x + neighbor.x,
-			y: pos.y + neighbor.y,
+		basinCandidate := Coordinate{
+			X: pos.X + neighbor.X,
+			Y: pos.Y + neighbor.Y,
 		}
 		if _, ok := seen[basinCandidate]; !ok {
 			seen[basinCandidate] = true
