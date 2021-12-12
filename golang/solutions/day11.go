@@ -1,8 +1,12 @@
 package solutions
 
 import (
+	"fmt"
 	"ochronus/aoc2021/utils"
 	"strings"
+	"time"
+
+	"github.com/gookit/color"
 )
 
 type intGrid map[Coordinate]int
@@ -52,9 +56,30 @@ func propagateFlash(grid intGrid, flashMap boolGrid, octopus Coordinate) {
 	}
 }
 
+func drawGrid(grid intGrid) {
+
+	time.Sleep(100 * time.Millisecond)
+	fmt.Print("\033[H\033[2J")
+	lines := [10][10]int{}
+	for octopus, level := range grid {
+		lines[octopus.X][octopus.Y] = level
+	}
+	for _, line := range lines {
+		for _, level := range line {
+			c := 25 + 255/10*level
+			color.Printf("<bg=%d,%d,%d>🐙</>", c, c, c)
+		}
+		fmt.Println("")
+	}
+	fmt.Println("\n")
+}
+
 func simulate(grid intGrid, part2 bool) (int, int) {
 	flashCount := 0
 	for step := 1; ; step++ {
+		if !part2 {
+			drawGrid(grid)
+		}
 		flashMap := make(boolGrid)
 
 		for octopus := range grid {
