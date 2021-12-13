@@ -19,7 +19,7 @@ func parseDay9Input() heightmap {
 	lines := utils.ReadFileLines("../inputs/09.txt")
 	grid := make(heightmap)
 	for x, line := range lines {
-		for y, height := range utils.StrToIntList(line) {
+		for y, height := range utils.StrToIntList(line, "") {
 			grid[Coordinate{x, y}] = height
 		}
 	}
