@@ -2,6 +2,7 @@ package solutions
 
 import (
 	"fmt"
+	"ochronus/aoc2021/datastructures"
 	"ochronus/aoc2021/utils"
 	"strings"
 	"time"
@@ -9,10 +10,10 @@ import (
 	"github.com/gookit/color"
 )
 
-type intGrid map[Coordinate]int
-type boolGrid map[Coordinate]bool
+type intGrid map[datastructures.Coordinate]int
+type boolGrid map[datastructures.Coordinate]bool
 
-var neighborOctopuses = []Coordinate{
+var neighborOctopuses = []datastructures.Coordinate{
 	{1, 0},
 	{1, 1},
 	{1, -1},
@@ -32,17 +33,17 @@ func fileToGrid(fname string) (grid intGrid) {
 			nums = append(nums, utils.StrToInt(nStr))
 		}
 		for x, level := range nums {
-			grid[Coordinate{x, y}] = level
+			grid[datastructures.Coordinate{x, y}] = level
 		}
 	}
 	return
 }
 
-func propagateFlash(grid intGrid, flashMap boolGrid, octopus Coordinate) {
+func propagateFlash(grid intGrid, flashMap boolGrid, octopus datastructures.Coordinate) {
 	flashMap[octopus] = true
 
 	for _, neighborDiff := range neighborOctopuses {
-		neighbor := Coordinate{octopus.X + neighborDiff.X, octopus.Y + neighborDiff.Y}
+		neighbor := datastructures.Coordinate{octopus.X + neighborDiff.X, octopus.Y + neighborDiff.Y}
 		if _, ok := grid[neighbor]; ok {
 			if flashMap[neighbor] {
 				continue

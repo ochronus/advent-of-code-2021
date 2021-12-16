@@ -1,36 +1,30 @@
 package solutions
 
 import (
+	"ochronus/aoc2021/datastructures"
 	"ochronus/aoc2021/utils"
 	"sort"
 )
 
-type heightmap map[Coordinate]int
-type boolmap map[Coordinate]bool
-
-var neighbors = [4]Coordinate{
-	{0, -1},
-	{0, 1},
-	{-1, 0},
-	{1, 0},
-}
+type heightmap map[datastructures.Coordinate]int
+type boolmap map[datastructures.Coordinate]bool
 
 func parseDay9Input() heightmap {
 	lines := utils.ReadFileLines("../inputs/09.txt")
 	grid := make(heightmap)
 	for x, line := range lines {
 		for y, height := range utils.StrToIntList(line, "") {
-			grid[Coordinate{x, y}] = height
+			grid[datastructures.Coordinate{X: x, Y: y}] = height
 		}
 	}
 	return grid
 }
 
-func findLowPoints(grid heightmap) (sum int, lowpoints []Coordinate) {
+func findLowPoints(grid heightmap) (sum int, lowpoints []datastructures.Coordinate) {
 	for pos, height := range grid {
 		lowest := 9
-		for _, neighbor := range neighbors {
-			if nHeight, ok := grid[Coordinate{
+		for _, neighbor := range datastructures.Neighbors2D {
+			if nHeight, ok := grid[datastructures.Coordinate{
 				X: pos.X + neighbor.X,
 				Y: pos.Y + neighbor.Y,
 			}]; ok {
@@ -68,9 +62,9 @@ func Day09P02() int {
 	return basinSizes[lastindex] * basinSizes[lastindex-1] * basinSizes[lastindex-2]
 }
 
-func getBasinSize(grid map[Coordinate]int, pos Coordinate, start Coordinate, seen boolmap) (sum int) {
-	for _, neighbor := range neighbors {
-		basinCandidate := Coordinate{
+func getBasinSize(grid map[datastructures.Coordinate]int, pos datastructures.Coordinate, start datastructures.Coordinate, seen boolmap) (sum int) {
+	for _, neighbor := range datastructures.Neighbors2D {
+		basinCandidate := datastructures.Coordinate{
 			X: pos.X + neighbor.X,
 			Y: pos.Y + neighbor.Y,
 		}

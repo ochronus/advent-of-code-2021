@@ -3,6 +3,7 @@ module ochronus/aoc2021
 go 1.17
 
 require (
+	github.com/beefsack/go-astar v0.0.0-20200827232313-4ecf9e304482 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/gookit/color v1.5.0 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect

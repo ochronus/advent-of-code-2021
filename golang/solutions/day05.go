@@ -1,16 +1,12 @@
 package solutions
 
 import (
+	"ochronus/aoc2021/datastructures"
 	"ochronus/aoc2021/utils"
 	"strings"
 )
 
-type Coordinate struct {
-	X int
-	Y int
-}
-
-func parseCoords(line string) (Coordinate, Coordinate) {
+func parseCoords(line string) (datastructures.Coordinate, datastructures.Coordinate) {
 	s := strings.Split(line, " -> ")
 	c1 := strings.Split(s[0], ",")
 	c2 := strings.Split(s[1], ",")
@@ -18,7 +14,7 @@ func parseCoords(line string) (Coordinate, Coordinate) {
 	y1 := utils.StrToInt(c1[1])
 	x2 := utils.StrToInt(c2[0])
 	y2 := utils.StrToInt(c2[1])
-	return Coordinate{X: x1, Y: y1}, Coordinate{X: x2, Y: y2}
+	return datastructures.Coordinate{X: x1, Y: y1}, datastructures.Coordinate{X: x2, Y: y2}
 }
 
 func getUnitDirection(a int, b int) int {
@@ -32,7 +28,7 @@ func getUnitDirection(a int, b int) int {
 }
 
 func solve(part2 bool) int {
-	linemap := map[Coordinate]int{}
+	linemap := map[datastructures.Coordinate]int{}
 	for _, line := range utils.ReadFileLines("../inputs/05.txt") {
 		start, end := parseCoords(line)
 		if start.X == end.X || start.Y == end.Y || part2 {
