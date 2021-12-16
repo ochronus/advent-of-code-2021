@@ -18,7 +18,7 @@ func parseDay13Input() (grid boolGrid, instructions []foldInstruction) {
 
 	for _, line := range strings.Split(input[0], "\n") {
 		dots := utils.StrToIntList(line, ",")
-		grid[datastructures.Coordinate{dots[0], dots[1]}] = true
+		grid[datastructures.Coordinate{X: dots[0], Y: dots[1]}] = true
 	}
 	for _, line := range strings.Split(input[1], "\n") {
 		p := strings.Split(line, "=")
@@ -36,7 +36,7 @@ func fold(grid boolGrid, instruction foldInstruction) (foldedGrid boolGrid) {
 		for leftHalfX := 0; leftHalfX < instruction.foldLine; leftHalfX++ {
 			for dot := range grid {
 				if dot.X == leftHalfX || dot.X == 2*instruction.foldLine-leftHalfX {
-					foldedGrid[datastructures.Coordinate{leftHalfX, dot.Y}] = true
+					foldedGrid[datastructures.Coordinate{X: leftHalfX, Y: dot.Y}] = true
 				}
 			}
 		}
@@ -45,7 +45,7 @@ func fold(grid boolGrid, instruction foldInstruction) (foldedGrid boolGrid) {
 		for topHalfY := 0; topHalfY < instruction.foldLine; topHalfY++ {
 			for dot := range grid {
 				if dot.Y == topHalfY || dot.Y == 2*instruction.foldLine-topHalfY {
-					foldedGrid[datastructures.Coordinate{dot.X, topHalfY}] = true
+					foldedGrid[datastructures.Coordinate{X: dot.X, Y: topHalfY}] = true
 				}
 			}
 		}
@@ -54,15 +54,15 @@ func fold(grid boolGrid, instruction foldInstruction) (foldedGrid boolGrid) {
 }
 
 func displayGrid(grid boolGrid) {
-	topLeft := datastructures.Coordinate{9999, 9999}
-	bottomRight := datastructures.Coordinate{0, 0}
+	topLeft := datastructures.Coordinate{X: 9999, Y: 9999}
+	bottomRight := datastructures.Coordinate{X: 0, Y: 0}
 	for c := range grid {
-		topLeft = datastructures.Coordinate{utils.Min(topLeft.X, c.X), utils.Min(topLeft.Y, c.Y)}
-		bottomRight = datastructures.Coordinate{utils.Max(bottomRight.X, c.X), utils.Max(bottomRight.Y, c.Y)}
+		topLeft = datastructures.Coordinate{X: utils.Min(topLeft.X, c.X), Y: utils.Min(topLeft.Y, c.Y)}
+		bottomRight = datastructures.Coordinate{X: utils.Max(bottomRight.X, c.X), Y: utils.Max(bottomRight.Y, c.Y)}
 	}
 	for y := topLeft.Y; y <= bottomRight.Y; y++ {
 		for x := topLeft.X; x <= bottomRight.X; x++ {
-			if grid[datastructures.Coordinate{x, y}] {
+			if grid[datastructures.Coordinate{X: x, Y: y}] {
 				fmt.Print("##")
 			} else {
 				fmt.Print("  ")

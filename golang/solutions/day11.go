@@ -33,7 +33,7 @@ func fileToGrid(fname string) (grid intGrid) {
 			nums = append(nums, utils.StrToInt(nStr))
 		}
 		for x, level := range nums {
-			grid[datastructures.Coordinate{x, y}] = level
+			grid[datastructures.Coordinate{X: x, Y: y}] = level
 		}
 	}
 	return
@@ -43,7 +43,7 @@ func propagateFlash(grid intGrid, flashMap boolGrid, octopus datastructures.Coor
 	flashMap[octopus] = true
 
 	for _, neighborDiff := range neighborOctopuses {
-		neighbor := datastructures.Coordinate{octopus.X + neighborDiff.X, octopus.Y + neighborDiff.Y}
+		neighbor := datastructures.Coordinate{X: octopus.X + neighborDiff.X, Y: octopus.Y + neighborDiff.Y}
 		if _, ok := grid[neighbor]; ok {
 			if flashMap[neighbor] {
 				continue
@@ -72,7 +72,7 @@ func drawGrid(grid intGrid) {
 		}
 		fmt.Println("")
 	}
-	fmt.Println("\n")
+	fmt.Println("")
 }
 
 func simulate(grid intGrid, part2 bool) (int, int) {
