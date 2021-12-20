@@ -7,7 +7,6 @@ import (
 )
 
 type heightmap map[datastructures.Coordinate]int
-type boolmap map[datastructures.Coordinate]bool
 
 func parseDay9Input() heightmap {
 	lines := utils.ReadFileLines("../inputs/09.txt")
@@ -53,7 +52,7 @@ func Day09P02() int {
 	_, lowpoints := findLowPoints(grid)
 
 	var basinSizes []int
-	seen := make(boolmap)
+	seen := make(datastructures.BoolMap)
 	for _, lowpoint := range lowpoints {
 		basinSizes = append(basinSizes, getBasinSize(grid, lowpoint, lowpoint, seen))
 	}
@@ -62,7 +61,7 @@ func Day09P02() int {
 	return basinSizes[lastindex] * basinSizes[lastindex-1] * basinSizes[lastindex-2]
 }
 
-func getBasinSize(grid map[datastructures.Coordinate]int, pos datastructures.Coordinate, start datastructures.Coordinate, seen boolmap) (sum int) {
+func getBasinSize(grid map[datastructures.Coordinate]int, pos datastructures.Coordinate, start datastructures.Coordinate, seen datastructures.BoolMap) (sum int) {
 	for _, neighbor := range datastructures.Neighbors2D {
 		basinCandidate := datastructures.Coordinate{
 			X: pos.X + neighbor.X,
